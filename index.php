@@ -15,6 +15,24 @@ $message_array = array();
 $succ_message=null;
 $error_message=array();
 $clean =array();
+$pdo=null;
+$stmt=null;
+$res=null;
+$option=null;
+
+//DB接続
+try{
+     $option = array(
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::MYSQL_ATTR_MULTI_STATEMENTS => false,
+     );
+   $pdo = new PDO('mysql:charset=UTF8;dbname=bord;host=localhost','root',);
+
+}catch(PDOException $e){
+
+    $error_message[]= $e->getMessage();
+}
+
 
 //データ出力処理
 if(!empty($_POST['button1'])){
@@ -27,24 +45,58 @@ if(!empty($_POST['button1'])){
 
      
        if($file_handle = fopen(FILENAME,"a")){
+        //書き込み日時取得
        $c_date = date("Y-m-d H:i:s");
       //書き込み内容の取得
       $data = "'".$clean['sente']."'"."','".$c_date."'\n" ;
       
+      //SQL作成:代替文字
+      $stmt = $pdo->prepare("INSERT INTO message (message,post_date)VALUES(:sente,:c_date)");
+
+      //値をセット:代替文字に追加
+     $stmt->bindParam(':sente',$clean['sente'],PDO::PARAM_STR);
+     $stmt->bindParam(':c_date',$c_date,PDO::PARAM_STR);
+     //SQL実行
+     $res = $stmt->execute();
+
+     if($res){
+         $success_message ="書き込み完了しました";
+         echo <<<EOM
+         <script type="text/javascript">
+         alert("投稿が完了しました")
+         </script>
+   EOM;
+     } else{
+            $error_message[] ='書き込みに失敗しました';
+            echo <<<EOM
+            <script type="text/javascript">
+         alert("投稿に失敗しました")
+         </script>
+   EOM;
+        }
+
+        //プリペアド削除
+        $stmt =null;
+    
+
+
+
 
       //書き込み
-       fwrite($file_handle,$data);
+       /*fwrite($file_handle,$data);
         fclose($file_handle);}
         echo <<<EOM
       <script type="text/javascript">
       alert("投稿が完了しました")
       </script>
-EOM;
-    }
+EOM;*/
+    }}
 }
 
+$pdo = null;
+
 //ファイルの読込
-if ($file_handle = fopen(FILENAME,'r')){
+/*if ($file_handle = fopen(FILENAME,'r')){
    while($data = fgets($file_handle)){
        $splite_data =preg_split('/\'/',$data);
        $message = array(
@@ -61,7 +113,7 @@ if ($file_handle = fopen(FILENAME,'r')){
     fclose($file_handle);
 
 }
-
+*/
 ?>
 <html lang="en">
 <head>
