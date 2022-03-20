@@ -14,11 +14,14 @@ $message = array();
 $message_array = array();
 $succ_message=null;
 $error_message=array();
+$clean =array();
 
 //データ出力処理
 if(!empty($_POST['button1'])){
      if(empty($_POST['sente'])){
       $error_message[] ='未入力は投稿できません';
+     }else{$clean['sente']= htmlspecialchars($_POST['sente'],ENT_QUOTES,'UTF-8');
+        $clean['sente'] = preg_replace('/\\r\\n|\\n|\\r/','<br>',$clean['sente']);
      }
      if(empty($error_message)){
 
@@ -26,7 +29,7 @@ if(!empty($_POST['button1'])){
        if($file_handle = fopen(FILENAME,"a")){
        $c_date = date("Y-m-d H:i:s");
       //書き込み内容の取得
-      $data = "'".$_POST['sente']."'"."','".$c_date."'\n" ;
+      $data = "'".$clean['sente']."'"."','".$c_date."'\n" ;
       
 
       //書き込み
