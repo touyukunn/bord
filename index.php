@@ -179,13 +179,7 @@ $pdo = null;
 <?php endif; ?>
 
 </section>
-<script>/*
-const button = document.getElementById('button1');
-//const error= document.getElementById('er');
-button.addEventListener('click',function(){
-   alert("完了");
-   
-})*/
-</script>
+
+
 </body>
 </html>
