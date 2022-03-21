@@ -39,7 +39,7 @@ if(!empty($_POST['button1'])){
      if(empty($_POST['sente'])){
       $error_message[] ='未入力は投稿できません';
      }else{$clean['sente']= htmlspecialchars($_POST['sente'],ENT_QUOTES,'UTF-8');
-        $clean['sente'] = preg_replace('/\\r\\n|\\n|\\r/','<br>',$clean['sente']);
+        $clean['sente'] = preg_replace('/\A[\p{C}\p{Z}]++|[\p{C}\p{Z}]++\z/u','', $clean['sente']);
      }
      if(empty($error_message)){
 
@@ -49,7 +49,10 @@ if(!empty($_POST['button1'])){
        $c_date = date("Y-m-d H:i:s");
       //書き込み内容の取得
       $data = "'".$clean['sente']."'"."','".$c_date."'\n" ;
-      
+     
+     //トランザクション開始
+     $pdo->beginTransaction();  
+     try{
       //SQL作成:代替文字
       $stmt = $pdo->prepare("INSERT INTO message (message,post_date)VALUES(:sente,:c_date)");
 
@@ -57,22 +60,30 @@ if(!empty($_POST['button1'])){
      $stmt->bindParam(':sente',$clean['sente'],PDO::PARAM_STR);
      $stmt->bindParam(':c_date',$c_date,PDO::PARAM_STR);
      //SQL実行
-     $res = $stmt->execute();
+     $stmt->execute();
 
+     //コミット
+     $res = $pdo->commit();
+     }catch(Exception $e)
+     {
+      //エラー時はロールバック
+      $pdo->rollBack();
+     }
+     
      if($res){
          $success_message ="書き込み完了しました";
          echo <<<EOM
          <script type="text/javascript">
          alert("投稿が完了しました")
          </script>
-   EOM;
+     EOM;
      } else{
             $error_message[] ='書き込みに失敗しました';
             echo <<<EOM
             <script type="text/javascript">
          alert("投稿に失敗しました")
          </script>
-   EOM;
+     EOM;
         }
 
         //プリペアド削除
@@ -82,14 +93,7 @@ if(!empty($_POST['button1'])){
 
 
 
-      //書き込み
-       /*fwrite($file_handle,$data);
-        fclose($file_handle);}
-        echo <<<EOM
-      <script type="text/javascript">
-      alert("投稿が完了しました")
-      </script>
-EOM;*/
+      
     }}
 }
 
