@@ -97,7 +97,17 @@ if(!empty($_POST['button1'])){
     }}
 }
 
+if(empty($error_message)){
+
+    //メッセージを取得する
+    $sql= "SELECT message,post_date FROM message ORDER BY post_date DESC";
+    //クエリ実行
+    $message_array = $pdo->query($sql);
+}
+
+//DB切断
 $pdo = null;
+
 
 //ファイルの読込
 /*if ($file_handle = fopen(FILENAME,'r')){
@@ -162,7 +172,7 @@ $pdo = null;
      </time>
    </div>
 
-  <p><?php echo nl2br($value['senten']);?></p>
+  <p><?php echo nl2br($value['message']);?></p>
  </article>
 
 <?php endforeach;?>
