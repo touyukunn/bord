@@ -130,13 +130,23 @@ $pdo = null;
 <?php endif; ?>
 
     <form  method="post" enctype="multipart/formdata" class="cform">
+        
+     <div id="rgn">
+         <p>道路状況投稿サイト</p>
+         <label>  
+               <p id ="rg"> 地域： <textarea id="text1" name="region"></textarea></p>
+         </label>
+     </div>
+  
 
      <div id="sente">
-         <label> 道路状況投稿サイト <br>
+         <label> <br>
                 <textarea id="text" name="sente"></textarea>
          </label>
      </div>
          
+     
+
      <div id="button1">
         <input class ="btn" type="submit" name="button1"value="投稿"> 
      </div>
