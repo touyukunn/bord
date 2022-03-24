@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <?php
-//保存先宣言
-define('FILENAME','./message.txt');
+
 //タイムゾーン
 date_default_timezone_set('Asia/Tokyo');
 
 //変数初期化
 $c_date = null;
-$data =null;
-$file_handle = null;
-$sp_data = null;
 $message = array();
 $message_array = array();
 $succ_message=null;
 $error_message=array();
-$clean =array();
 $pdo=null;
 $stmt=null;
 $res=null;
 $option=null;
 
+define('DB_host','localhost');
+define('DB_user','root');
+define('DB_name','bord');
+
+
 //DB接続
-try{
+try {
      $option = array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::MYSQL_ATTR_MULTI_STATEMENTS => false,
      );
-   $pdo = new PDO('mysql:charset=UTF8;dbname=bord;host=localhost','root',);
+   $pdo = new PDO('mysql:charset=UTF8;dbname='.DB_name.';host='.DB_host,DB_user);
 
 }catch(PDOException $e){
 
@@ -44,7 +44,7 @@ if(!empty($_POST['button1'])){
      if(empty($error_message)){
 
      
-       if($file_handle = fopen(FILENAME,"a")){
+      
         //書き込み日時取得
        $c_date = date("Y-m-d H:i:s");
       //書き込み内容の取得
@@ -54,7 +54,7 @@ if(!empty($_POST['button1'])){
      $pdo->beginTransaction();  
      try{
       //SQL作成:代替文字
-      $stmt = $pdo->prepare("INSERT INTO message (message,post_date)VALUES(:sente,:c_date)");
+      $stmt = $pdo->prepare("INSERT INTO messe (message,date)VALUES(:sente,:c_date)");
 
       //値をセット:代替文字に追加
      $stmt->bindParam(':sente',$clean['sente'],PDO::PARAM_STR);
@@ -94,13 +94,13 @@ if(!empty($_POST['button1'])){
 
 
       
-    }}
+    }
 }
 
 if(empty($error_message)){
 
     //メッセージを取得する
-    $sql= "SELECT message,post_date FROM message ORDER BY post_date DESC";
+    $sql= "SELECT message,date FROM messe ORDER BY date DESC";
     //クエリ実行
     $message_array = $pdo->query($sql);
 }
@@ -108,26 +108,6 @@ if(empty($error_message)){
 //DB切断
 $pdo = null;
 
-
-//ファイルの読込
-/*if ($file_handle = fopen(FILENAME,'r')){
-   while($data = fgets($file_handle)){
-       $splite_data =preg_split('/\'/',$data);
-       $message = array(
-         'senten'=> $splite_data[1],
-         'post_date'=> $splite_data[4],);
-     
-     array_unshift($message_array,$message);}
-         
-     print $splite_data[5];
-     $succ_message='完了';
-     
-     
-    //ファイルを閉じる
-    fclose($file_handle);
-
-}
-*/
 ?>
 <html lang="en">
 <head>
@@ -152,27 +132,27 @@ $pdo = null;
     <form  method="post" enctype="multipart/formdata" class="cform">
 
      <div id="sente">
-         <label> 道路状況 <br>
+         <label> 道路状況投稿サイト <br>
                 <textarea id="text" name="sente"></textarea>
          </label>
      </div>
          
      <div id="button1">
-        <input type="submit" name="button1"value="投稿"> 
+        <input class ="btn" type="submit" name="button1"value="投稿"> 
      </div>
     </form>
-<hr>
+<hr color = "blue">
 <section>
 <?php if(!empty($message_array)):?>
 <?php foreach($message_array as $value):?>
  <article>
     <div class="info">
-      <h2><time><?php echo date('Y年m月d日 H:i',strtotime($value['post_date']));?></h2>
+      <h2 class = "time"><time><?php echo date('Y年m月d日 H:i',strtotime($value['date']));?></h2>
 
      </time>
    </div>
 
-  <p><?php echo nl2br($value['message']);?></p>
+  <p class="mess"><?php echo nl2br(htmlspecialchars( $value['message'], ENT_QUOTES, 'UTF-8'));?></p>
  </article>
 
 <?php endforeach;?>
