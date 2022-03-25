@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <?php
 
+
+
 //タイムゾーン
 date_default_timezone_set('Asia/Tokyo');
 
 //変数初期化
+$region = array();
 $c_date = null;
 $message = array();
 $message_array = array();
@@ -34,12 +37,16 @@ try {
 }
 
 
+
 //データ出力処理
 if(!empty($_POST['button1'])){
      if(empty($_POST['sente'])){
       $error_message[] ='未入力は投稿できません';
      }else{$clean['sente']= htmlspecialchars($_POST['sente'],ENT_QUOTES,'UTF-8');
         $clean['sente'] = preg_replace('/\A[\p{C}\p{Z}]++|[\p{C}\p{Z}]++\z/u','', $clean['sente']);
+        $clean['region']= htmlspecialchars($_POST['region'],ENT_QUOTES,'UTF-8');
+        $clean['region'] = preg_replace('/\A[\p{C}\p{Z}]++|[\p{C}\p{Z}]++\z/u','', $clean['region']);
+
      }
      if(empty($error_message)){
 
@@ -54,9 +61,10 @@ if(!empty($_POST['button1'])){
      $pdo->beginTransaction();  
      try{
       //SQL作成:代替文字
-      $stmt = $pdo->prepare("INSERT INTO messe (message,date)VALUES(:sente,:c_date)");
+      $stmt = $pdo->prepare("INSERT INTO messe (region,message,date)VALUES(:region,:sente,:c_date)");
 
       //値をセット:代替文字に追加
+     $stmt->bindParam(':region',$clean['region'],PDO::PARAM_STR); 
      $stmt->bindParam(':sente',$clean['sente'],PDO::PARAM_STR);
      $stmt->bindParam(':c_date',$c_date,PDO::PARAM_STR);
      //SQL実行
@@ -100,7 +108,7 @@ if(!empty($_POST['button1'])){
 if(empty($error_message)){
 
     //メッセージを取得する
-    $sql= "SELECT message,date FROM messe ORDER BY date DESC";
+    $sql= "SELECT region,message,date FROM messe ORDER BY date DESC";
     //クエリ実行
     $message_array = $pdo->query($sql);
 }
@@ -127,14 +135,14 @@ $pdo = null;
             <li id="er"><?php echo $value; ?></li>
         <?php endforeach;?>
     </ul>
-<?php endif; ?>
+ <?php endif; ?>
 
     <form  method="post" enctype="multipart/formdata" class="cform">
         
      <div id="rgn">
-         <p>道路状況投稿サイト</p>
+         <p id ="toukou">道路状況投稿サイト</p>
          <label>  
-               <p id ="rg"> 地域： <textarea id="text1" name="region"></textarea></p>
+               <div id ="rg"> 地域：<textarea id="text1" name="region"></textarea></div>
          </label>
      </div>
   
@@ -151,22 +159,24 @@ $pdo = null;
         <input class ="btn" type="submit" name="button1"value="投稿"> 
      </div>
     </form>
-<hr color = "blue">
-<section>
-<?php if(!empty($message_array)):?>
-<?php foreach($message_array as $value):?>
+ <hr color = "blue">
+ <section>
+ <?php if(!empty($message_array)):?>
+ <?php foreach($message_array as $value):?>
  <article>
-    <div class="info">
+    <div >
       <h2 class = "time"><time><?php echo date('Y年m月d日 H:i',strtotime($value['date']));?></h2>
 
      </time>
    </div>
 
+ <p class="rgn1"><?php echo nl2br(htmlspecialchars( $value['region'], ENT_QUOTES, 'UTF-8'));?></p>
+
   <p class="mess"><?php echo nl2br(htmlspecialchars( $value['message'], ENT_QUOTES, 'UTF-8'));?></p>
  </article>
 
-<?php endforeach;?>
-<?php endif; ?>
+ <?php endforeach;?>
+ <?php endif; ?>
 
 </section>
 
