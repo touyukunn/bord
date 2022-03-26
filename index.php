@@ -141,15 +141,16 @@ $pdo = null;
         
      <div id="rgn">
          <p id ="toukou">道路状況投稿サイト</p>
-         <label>  
-               <div id ="rg"> 地域：<textarea id="text1" name="region"></textarea></div>
-         </label>
+         <span id="rg">地域</span>
+                
+         
+         <textarea id="text1" name="region"></textarea>
      </div>
   
 
      <div id="sente">
          <label> <br>
-                <textarea id="text" name="sente"></textarea>
+                <textarea id="text" name="sente" placeholder="投稿内容を入力してください"></textarea>
          </label>
      </div>
          
@@ -172,7 +173,8 @@ $pdo = null;
 
  <p class="rgn1"><?php echo nl2br(htmlspecialchars( $value['region'], ENT_QUOTES, 'UTF-8'));?></p>
 
-  <p class="mess"><?php echo nl2br(htmlspecialchars( $value['message'], ENT_QUOTES, 'UTF-8'));?></p>
+  <span class="mess"><?php echo nl2br(htmlspecialchars( $value['message'], ENT_QUOTES, 'UTF-8'));?></span>
+  <hr>
  </article>
 
  <?php endforeach;?>
