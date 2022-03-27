@@ -18,9 +18,9 @@ $stmt=null;
 $res=null;
 $option=null;
 
-define('DB_host','localhost');
-define('DB_user','root');
-define('DB_name','bord');
+define('DB_host','');
+define('DB_user','');
+define('DB_name','');
 session_start();
 
 //DB接続
