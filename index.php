@@ -159,10 +159,10 @@ $pdo = null;
 
 
  <form  method="post">
- 
+    <div class ="srch">
      <input type="text" name="search"placeholder="検索内容を入力">
        <input type="submit" name="buttonk" value="検索">
-
+        </div>
       
 </form>
 

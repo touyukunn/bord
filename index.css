@@ -33,7 +33,8 @@ div#rgn{font-size:30px;
 #rg {
     padding:10px;
     color:green;
-    vertical-align:top;}
+    vertical-align:top;
+    }
 
 #text1
 {   
@@ -45,8 +46,20 @@ div#rgn{font-size:30px;
 }
 
 #toukou{
-    color:red;
     
+  
+    
+    font-size:35px;
+	text-align:center;
+	line-height:0.95em;
+	font-weight:bold;
+	color: #FFF;
+	text-shadow: 
+		0 0 0.10em #2962FF,
+		0 0 0.15em #2962FF,
+		0 0 0.80em #2962FF,
+		0 0 1.00em #2962FF;
+  
 }
    
 .btn{
@@ -89,8 +102,8 @@ hr{
     color:green;
     text-align:left;}
 
-
-
-
+.srch{
+    text-align:right;
+}
 
 
