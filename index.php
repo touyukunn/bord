@@ -21,7 +21,7 @@ $option=null;
 define('DB_host','localhost');
 define('DB_user','root');
 define('DB_name','bord');
-
+session_start();
 
 //DB接続
 try {
@@ -79,12 +79,9 @@ if(!empty($_POST['button1'])){
      }
      
      if($res){
-         $success_message ="書き込み完了しました";
-         echo <<<EOM
-         <script type="text/javascript">
-         alert("投稿が完了しました")
-         </script>
-     EOM;
+        
+        
+     $_SESSION['success_message'] = 'メッセージを書き込みました。';
      } else{
             $error_message[] ='書き込みに失敗しました';
             echo <<<EOM
@@ -96,7 +93,10 @@ if(!empty($_POST['button1'])){
 
         //プリペアド削除
         $stmt =null;
-    
+
+
+        header('Location: ./');
+		exit;
 
 
 
@@ -105,13 +105,22 @@ if(!empty($_POST['button1'])){
     }
 }
 
-if(empty($error_message)){
+//検索sql実行
+if(!empty($_POST['search'])){
+    $sql1= "SELECT region,message,date FROM messe WHERE message or region LIKE '%" . $_POST["search"] . "%' ";
+    //クエリ実行
+    $message_array = $pdo->query($sql1);
+}else{
+    if(empty($error_message)){
 
     //メッセージを取得する
     $sql= "SELECT region,message,date FROM messe ORDER BY date DESC";
     //クエリ実行
     $message_array = $pdo->query($sql);
+ }
 }
+
+
 
 //DB切断
 $pdo = null;
@@ -122,11 +131,22 @@ $pdo = null;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>投稿</title>
+    <title>道路状況サイト</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
     
+
+<?php if( empty($_POST['button1']) && !empty($_SESSION['success_message']) ): ?>
+    <p class="success_message">
+         <script type="text/javascript">
+         alert("投稿が完了しました")
+         </script>
+     </p>
+    <?php unset($_SESSION['success_message']); ?>
+<?php endif; ?>
+
+
    <?php //エラーメッセージ
    if(!empty($error_message)):?>
     
@@ -137,10 +157,21 @@ $pdo = null;
     </ul>
  <?php endif; ?>
 
+
+ <form  method="post">
+ 
+     <input type="text" name="search"placeholder="検索内容を入力">
+       <input type="submit" name="buttonk" value="検索">
+
+      
+</form>
+
     <form  method="post" enctype="multipart/formdata" class="cform">
-        
+     
+     
+  
      <div id="rgn">
-         <p id ="toukou">道路状況投稿サイト</p>
+         <p id ="toukou">道路状況投稿サイト</p><br>
          <span id="rg">地域</span>
                 
          
@@ -170,10 +201,10 @@ $pdo = null;
 
      </time>
    </div>
-
+ <!--地域-->
  <p class="rgn1"><?php echo nl2br(htmlspecialchars( $value['region'], ENT_QUOTES, 'UTF-8'));?></p>
-
-  <span class="mess"><?php echo nl2br(htmlspecialchars( $value['message'], ENT_QUOTES, 'UTF-8'));?></span>
+<!--投稿内容-->
+  <p class="mess"><?php echo nl2br(htmlspecialchars( $value['message'], ENT_QUOTES, 'UTF-8'));?></p>
   <hr>
  </article>
 

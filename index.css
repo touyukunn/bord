@@ -1,3 +1,15 @@
+html {
+    background-color: #BAD3FF; /* 周囲の背景色 */
+ }
+
+
+
+body {
+    margin: 0px 15%;
+    padding: 10px;
+    background-color: white;
+ }
+
 div#sente{font-size:30px;
  color:red;
  text-align:center;
@@ -34,6 +46,7 @@ div#rgn{font-size:30px;
 
 #toukou{
     color:red;
+    
 }
    
 .btn{
@@ -74,7 +87,9 @@ hr{
 
 .rgn1{
     color:green;
-}
+    text-align:left;}
+
+
 
 
 
