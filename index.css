@@ -13,8 +13,8 @@ body {
 div#sente{font-size:30px;
  color:red;
  text-align:center;
- 
- 
+ box-sizing:border-box;border:none;
+ width:100%
 }  
 div#rgn{font-size:30px;
     
@@ -26,8 +26,10 @@ div#rgn{font-size:30px;
 
 #text{
     height:200px;
-    width:600px;
+   
     font-size: 30px;
+    
+    width:100%
    
 }
 #rg {
