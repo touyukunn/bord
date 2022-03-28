@@ -24,7 +24,7 @@ define('DB_name','dbname');
 session_start();
 
 
-function dbConnect(){
+/*function dbConnect(){
     $db = parse_url($_SERVER['CLEARDB_DATABASE_URL']);
     $db['dbname'] = ltrim($db['path'], '/');
     $dsn = "mysql:host={$db['host']};dbname={$db['dbname']};charset=utf8";
@@ -38,8 +38,8 @@ function dbConnect(){
     $pdo = new PDO($dsn,$user,$password,$options);
     return $pdo;
 }
-dbconect();
-/*DB接続
+dbconect();*/
+DB接続
 try {
      $option = array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -50,7 +50,7 @@ try {
 }catch(PDOException $e){
 
     $error_message[]= $e->getMessage();
-}*/
+}
 
 
 
