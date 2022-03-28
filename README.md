@@ -5,5 +5,7 @@ html,css,php
 <h2>作成目的</h2>
 各地の道路状況を記載できる掲示板を目指して作成
 
+<h3>deploy</h3>
+heroku
 
 
