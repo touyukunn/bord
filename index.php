@@ -18,34 +18,21 @@ $stmt=null;
 $res=null;
 $option=null;
 
-define('DB_host','host');
-define('DB_user','user');
-define('DB_name','dbname');
+define('DB_host',getenv('host'));
+define('DB_user',getenv('user'));
+define('DB_name',getenv('name'));
+define('DB_pass',getenv('pass'));
 session_start();
 
 
-/*function dbConnect(){
-    $db = parse_url($_SERVER['CLEARDB_DATABASE_URL']);
-    $db['dbname'] = ltrim($db['path'], '/');
-    $dsn = "mysql:host={$db['host']};dbname={$db['dbname']};charset=utf8";
-    $user = $db['user'];
-    $password = $db['pass'];
-    $options = array(
-      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-      PDO::MYSQL_ATTR_USE_BUFFERED_QUERY =>false,,
-    );
-    $pdo = new PDO($dsn,$user,$password,$options);
-    return $pdo;
-}
-dbconect();*/
+
 //DB接続
 try{
      $option = array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::MYSQL_ATTR_MULTI_STATEMENTS => false,
      );
-   $pdo = new PDO('mysql:charset=UTF8;dbname='.DB_name.';host='.DB_host,DB_user);
+   $pdo = new PDO('mysql:charset=UTF8;dbname='.DB_name.';host='.DB_host,DB_user,DB_pass);
 
 }catch(PDOException $e){
 
