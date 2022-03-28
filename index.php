@@ -110,7 +110,7 @@ if(!empty($_POST['button1'])){
 
 //検索sql実行
 if(!empty($_POST['search'])){
-    $sql1= "SELECT region,message,date FROM messe WHERE message LIKE '%" . $_POST["search"] . "%' " OR region LIKE '%" . $_POST["search"] . "%' ";
+    $sql1= "SELECT region,message,date FROM messe WHERE message LIKE '%" . $_POST["search"] . "%' OR region LIKE '%" . $_POST["search"] . "%' ";
     //クエリ実行
     $message_array = $pdo->query($sql1);
 }else{
