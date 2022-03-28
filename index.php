@@ -39,8 +39,8 @@ session_start();
     return $pdo;
 }
 dbconect();*/
-DB接続
-try {
+//DB接続
+try{
      $option = array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::MYSQL_ATTR_MULTI_STATEMENTS => false,
