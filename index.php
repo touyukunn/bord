@@ -18,12 +18,28 @@ $stmt=null;
 $res=null;
 $option=null;
 
-define('DB_host','localhost');
-define('DB_user','root');
-define('DB_name','bord');
+define('DB_host','host');
+define('DB_user','user');
+define('DB_name','dbname');
 session_start();
 
-//DB接続
+
+function dbConnect(){
+    $db = parse_url($_SERVER['CLEARDB_DATABASE_URL']);
+    $db['dbname'] = ltrim($db['path'], '/');
+    $dsn = "mysql:host={$db['host']};dbname={$db['dbname']};charset=utf8";
+    $user = $db['user'];
+    $password = $db['pass'];
+    $options = array(
+      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+      PDO::MYSQL_ATTR_USE_BUFFERED_QUERY =>false,,
+    );
+    $pdo = new PDO($dsn,$user,$password,$options);
+    return $pdo;
+}
+dbconect();
+/*DB接続
 try {
      $option = array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -34,7 +50,7 @@ try {
 }catch(PDOException $e){
 
     $error_message[]= $e->getMessage();
-}
+}*/
 
 
 
