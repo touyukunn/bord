@@ -1,5 +1,5 @@
 # bord
-"bord"is It is a trial bulletin board　with PHP.
+It is a trial bulletin board　with PHP.
 <h2>使用言語</h2>
 html,css,php
 <h2>作成目的</h2>
