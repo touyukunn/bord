@@ -96,9 +96,8 @@ if(!empty($_POST['button1'])){
 
         //プリペアド削除
         $stmt =null;
-
-
-        header('Location: ./');
+        ob_start();
+        header('Location:./');
 		exit;
 
 
@@ -147,10 +146,13 @@ $pdo = null;
          </script>
      </p>
     <?php unset($_SESSION['success_message']); ?>
+    
 <?php endif; ?>
 
 
-   <?php //エラーメッセージ
+
+
+<?php //エラーメッセージ
    if(!empty($error_message)):?>
     
     <ul class = "error_message">
@@ -158,18 +160,21 @@ $pdo = null;
             <li id="er"><?php echo $value; ?></li>
         <?php endforeach;?>
     </ul>
- <?php endif; ?>
+    
+<?php endif; ?>
 
 
- <form  method="post">
+<form  method="post">
     <div class ="srch">
      <input type="text" name="search"placeholder="検索内容を入力">
        <input type="submit" name="buttonk" value="検索">
         </div>
-      
+        
 </form>
 
-    <form  method="post" enctype="multipart/formdata" class="cform">
+<div id="view_time"></div>
+    
+<form  method="post" enctype="multipart/formdata" class="cform">
      
      
   
@@ -193,11 +198,11 @@ $pdo = null;
      <div id="button1">
         <input class ="btn" type="submit" name="button1"value="投稿"> 
      </div>
-    </form>
+ </form>
  <hr color = "blue">
- <section>
- <?php if(!empty($message_array)):?>
- <?php foreach($message_array as $value):?>
+<section>
+<?php if(!empty($message_array)):?>
+<?php foreach($message_array as $value):?>
  <article>
     <div >
       <h2 class = "time"><time><?php echo date('Y年m月d日 H:i',strtotime($value['date']));?></h2>
@@ -210,12 +215,36 @@ $pdo = null;
   <p class="mess"><?php echo nl2br(htmlspecialchars( $value['message'], ENT_QUOTES, 'UTF-8'));?></p>
   <hr>
  </article>
+<?php endforeach;?>
 
- <?php endforeach;?>
- <?php endif; ?>
+<?php endif; ?>
 
 </section>
 
+<script type="text/javascript">
+ function set2fig(num) {
+  // 桁数が1桁だったら先頭に0を加えて2桁に調整する
+  var ret;
+  if( num < 10 ) { ret = "0" + num; }
+  else { ret = num; }
+  return ret;
+ }
+
+ function getNow() {
+	var now = new Date();
+	var year = now.getFullYear();
+	var mon = now.getMonth()+1; //１を足すこと
+	var day = now.getDate();
+	var hour = set2fig( now.getHours() );
+	var min = set2fig( now.getMinutes() );
+	var sec =  set2fig( now.getSeconds() );
+
+	//出力用
+  var ss = "現在時刻"+"  "+hour + ":" + min + ":" + sec + "";
+ document.getElementById("view_time").innerHTML = ss;};
+ 
+ setInterval('getNow()',1000);
+</script>
 
 </body>
 </html>
