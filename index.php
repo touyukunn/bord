@@ -162,6 +162,7 @@ $pdo = null;
     
 <?php endif; ?>
 
+<div id="view_time"></div>
 
 <form  method="post">
     <div class ="srch">
@@ -170,8 +171,8 @@ $pdo = null;
         </div>
         
 </form>
+<p id ="toukou">道路状況投稿サイト</p><br>
 
-<div id="view_time"></div>
 <br>
 <ul>
     <li><a href="nagano.php">長野市道路状況投稿一覧</a></li>
@@ -184,7 +185,7 @@ $pdo = null;
      
   
      <div id="rgn">
-         <p id ="toukou">道路状況投稿サイト</p><br>
+         
          <span id="rg">地域</span>
                 
          
