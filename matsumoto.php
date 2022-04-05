@@ -63,7 +63,7 @@ $pdo = null;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>道路状況サイト</title>
+    <title>松本市道路状況</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
@@ -86,8 +86,8 @@ $pdo = null;
      
   
      <div id="rgn">
-         <p id ="toukou">道路状況投稿サイト</p><br>
-         <span id="rg">地域</span>
+         <p id ="toukou">松本市道路状況一覧</p><br>
+         <span id="rg"></span>
                 
    
 
