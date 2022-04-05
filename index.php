@@ -137,7 +137,6 @@ $pdo = null;
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    
 
 <?php if( empty($_POST['button1']) && !empty($_SESSION['success_message']) ): ?>
     <p class="success_message">
@@ -173,7 +172,13 @@ $pdo = null;
 </form>
 
 <div id="view_time"></div>
-    
+<br>
+<ul>
+    <li><a href="nagano.php">長野市道路状況投稿一覧</a></li>
+    <li><a href="matsumoto.php">松本市道路状況投稿一覧</a></li>
+    <li><a href="ueda.php">上田市道路状況投稿一覧</a></li>
+</ul>  
+
 <form  method="post" enctype="multipart/formdata" class="cform">
      
      
@@ -199,6 +204,7 @@ $pdo = null;
         <input class ="btn" type="submit" name="button1"value="投稿"> 
      </div>
  </form>
+
  <hr color = "blue">
 <section>
 <?php if(!empty($message_array)):?>
