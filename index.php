@@ -171,14 +171,10 @@ $pdo = null;
         </div>
         
 </form>
-<p id ="toukou">道路状況投稿サイト</p><br>
+<p id ="toukou">上田市道路状況投稿サイト</p><br>
 
 <br>
-<ul>
-    <li><a href="nagano.php">長野市道路状況投稿一覧</a></li>
-    <li><a href="matsumoto.php">松本市道路状況投稿一覧</a></li>
-    <li><a href="ueda.php">上田市道路状況投稿一覧</a></li>
-</ul>  
+
 
 <form  method="post" enctype="multipart/formdata" class="cform">
      
@@ -189,9 +185,19 @@ $pdo = null;
          <span id="rg">地域</span>
                 
          
-         <textarea id="text1" name="region"></textarea>
+         <textarea id="text1" name="region" >上田市</textarea>
      </div>
-  
+     
+     <div id="sts">
+        <span id="stsst">状況</span>
+      <select name="status">
+          <option hidden>選択</option> 
+          <option value="s1">事故</option> 
+          <option value="s2">渋滞</option> 
+          <option value="s3">スタック</option>
+          <option value="s4">通行止め</option> 
+        </select> 
+    </div>
 
      <div id="sente">
          <label> <br>

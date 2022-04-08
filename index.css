@@ -18,7 +18,7 @@ div#sente{font-size:30px;
 }  
 div#rgn{font-size:30px;
     
-    text-align:center;
+    padding-left: 50px;
     vertical-align: middle;
     
    } 
@@ -33,7 +33,7 @@ div#rgn{font-size:30px;
    
 }
 #rg {
-    padding:10px;
+    
     color:green;
     vertical-align:top;
     }
@@ -41,10 +41,10 @@ div#rgn{font-size:30px;
 #text1
 {   
     padding: 10px;
-    height:45px;
-    width:150px;
+    height:30px;
+    width:125px;
     font-size:30px;
-    text-align:center;
+    
 }
 
 #toukou{
@@ -112,4 +112,23 @@ hr{
 #view_time{
     color:blue;
     text-align: left;
+}
+
+#sts{
+    padding-left: 50px;
+    display: inline-block;
+    font-size: 30px;
+
+
+} 
+select{
+    background:white;
+    font-size:1em;
+
+  }
+  option:first-child{
+    background:rgb(108, 190, 245);
+  }
+#stsst{
+    color:green;
 }
