@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <?php
 
 
@@ -173,7 +174,10 @@ $pdo = null;
 </form>
 <p id ="toukou">上田市道路状況投稿サイト</p><br>
 
-<br>
+<span id="map">
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12845.06998343043!2d138.2293596346558!3d36.40272291786259!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sja!2sjp!4v1649470599292!5m2!1sja!2sjp" width="280" height="300"  style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</span>
 
 
 <form  method="post" enctype="multipart/formdata" class="cform">
@@ -188,6 +192,9 @@ $pdo = null;
          <textarea id="text1" name="region" >上田市</textarea>
      </div>
      
+     
+
+
      <div id="sts">
         <span id="stsst">状況</span>
       <select name="status">

@@ -1,5 +1,6 @@
 html {
     background-color: #BAD3FF; /* 周囲の背景色 */
+    
  }
 
 
@@ -18,7 +19,7 @@ div#sente{font-size:30px;
 }  
 div#rgn{font-size:30px;
     
-    padding-left: 50px;
+    
     vertical-align: middle;
     
    } 
@@ -115,7 +116,7 @@ hr{
 }
 
 #sts{
-    padding-left: 50px;
+   
     display: inline-block;
     font-size: 30px;
 
@@ -131,4 +132,33 @@ select{
   }
 #stsst{
     color:green;
+}
+
+/*スマホ用CSS*/
+@media screen and (max-width:480px) {
+   
+
+    #map{
+       width:300px;
+            
+    }
+ 
+	/*　画面サイズが480px以下の場合ここの記述が適用される　*/
+ 
+}
+/*PC用CSS*/
+@media screen and (min-width:1280px) {
+   
+
+    #map{
+        padding-left: 600px;
+            
+    }
+ 
+	/*　画面サイズが480px以下の場合ここの記述が適用される　*/
+ 
+}
+#map{
+   
+        
 }
