@@ -96,7 +96,7 @@ hr{
 }
 
 .time{
-    font-size:35px;
+    font-size:25px;
     text-align:right;
     color:blue;
 }
@@ -119,6 +119,7 @@ hr{
    
     display: inline-block;
     font-size: 30px;
+    bottom: 300px;
 
 
 } 
