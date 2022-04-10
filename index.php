@@ -50,7 +50,8 @@ if(!empty($_POST['button1'])){
         $clean['sente'] = preg_replace('/\A[\p{C}\p{Z}]++|[\p{C}\p{Z}]++\z/u','', $clean['sente']);
         $clean['region']= htmlspecialchars($_POST['region'],ENT_QUOTES,'UTF-8');
         $clean['region'] = preg_replace('/\A[\p{C}\p{Z}]++|[\p{C}\p{Z}]++\z/u','', $clean['region']);
-
+        $clean['status']= htmlspecialchars($_POST['status'],ENT_QUOTES,'UTF-8');
+        $clean['status'] = preg_replace('/\A[\p{C}\p{Z}]++|[\p{C}\p{Z}]++\z/u','', $clean['status']);
      }
      if(empty($error_message)){
 
@@ -65,12 +66,13 @@ if(!empty($_POST['button1'])){
      $pdo->beginTransaction();  
      try{
       //SQL作成:代替文字
-      $stmt = $pdo->prepare("INSERT INTO messe (region,message,date)VALUES(:region,:sente,:c_date)");
+      $stmt = $pdo->prepare("INSERT INTO messe (region,message,date,status)VALUES(:region,:sente,:c_date,:c_sts)");
 
       //値をセット:代替文字に追加
      $stmt->bindParam(':region',$clean['region'],PDO::PARAM_STR); 
      $stmt->bindParam(':sente',$clean['sente'],PDO::PARAM_STR);
      $stmt->bindParam(':c_date',$c_date,PDO::PARAM_STR);
+     $stmt->bindParam(':c_sts',$clean['status'],PDO::PARAM_STR);
      //SQL実行
      $stmt->execute();
 
@@ -95,6 +97,8 @@ if(!empty($_POST['button1'])){
      EOM;
         }
 
+        
+
         //プリペアド削除
         $stmt =null;
         ob_start();
@@ -110,14 +114,14 @@ if(!empty($_POST['button1'])){
 
 //検索sql実行
 if(!empty($_POST['search'])){
-    $sql1= "SELECT region,message,date FROM messe WHERE message LIKE '%" . $_POST["search"] . "%' OR region LIKE '%" . $_POST["search"] . "%' ";
+    $sql1= "SELECT region,message,date,status FROM messe WHERE message LIKE '%" . $_POST["search"] . "%' OR region LIKE '%" . $_POST["search"] . "%' ";
     //クエリ実行
     $message_array = $pdo->query($sql1);
 }else{
     if(empty($error_message)){
 
     //メッセージを取得する
-    $sql= "SELECT region,message,date FROM messe ORDER BY date DESC";
+    $sql= "SELECT region,message,date,status FROM messe ORDER BY date DESC";
     //クエリ実行
     $message_array = $pdo->query($sql);
  }
@@ -172,7 +176,9 @@ $pdo = null;
         </div>
         
 </form>
-<p id ="toukou">上田市道路状況投稿サイト</p><br>
+<p id ="toukou">上田市</p>
+<p id ="toukou">道路状況投稿サイト</p>
+<br>
 
 <span id="map">
 
@@ -199,10 +205,10 @@ $pdo = null;
         <span id="stsst">状況</span>
       <select name="status">
           <option hidden>選択</option> 
-          <option value="s1">事故</option> 
-          <option value="s2">渋滞</option> 
-          <option value="s3">スタック</option>
-          <option value="s4">通行止め</option> 
+          <option value="事故">事故</option> 
+          <option value="渋滞">渋滞</option> 
+          <option value="スタック">スタック</option>
+          <option value="通行止め">通行止め</option> 
         </select> 
     </div>
 
@@ -226,13 +232,18 @@ $pdo = null;
  <article>
     <div >
       <h2 class = "time"><time><?php echo date('Y年m月d日 H:i',strtotime($value['date']));?></h2>
-
+      <!--状況-->
+     <p class="status_view"><?php echo nl2br(htmlspecialchars( $value['status'], ENT_QUOTES, 'UTF-8'));?></p>
      </time>
    </div>
+   
+
  <!--地域-->
  <p class="rgn1"><?php echo nl2br(htmlspecialchars( $value['region'], ENT_QUOTES, 'UTF-8'));?></p>
+ 
 <!--投稿内容-->
   <p class="mess"><?php echo nl2br(htmlspecialchars( $value['message'], ENT_QUOTES, 'UTF-8'));?></p>
+ 
   <hr>
  </article>
 <?php endforeach;?>
