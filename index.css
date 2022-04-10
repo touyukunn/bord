@@ -34,7 +34,7 @@ div#rgn{font-size:30px;
    
 }
 #rg {
-    
+    text-align:center;
     color:green;
     vertical-align:top;
     }
@@ -45,7 +45,7 @@ div#rgn{font-size:30px;
     height:30px;
     width:125px;
     font-size:30px;
-    
+   
 }
 
 #toukou{
@@ -92,16 +92,17 @@ hr{
     
     font-size:20px;
     vertical-align: middle;
+    text-align: center;
   
 }
 
 .time{
-    font-size:25px;
+    font-size:20px;
     text-align:right;
     color:blue;
 }
 
-.rgn1{
+.rgn1{font-size:20px;
     color:green;
     text-align:left;}
 
@@ -115,13 +116,12 @@ hr{
     text-align: left;
 }
 
-#sts{
+div#sts{
    
     display: inline-block;
     font-size: 30px;
     bottom: 300px;
-
-
+    text-align: center;
 } 
 select{
     background:white;
@@ -152,14 +152,14 @@ select{
    
 
     #map{
-        padding-left: 600px;
+        padding-left: 900px;
             
     }
  
 	/*　画面サイズが480px以下の場合ここの記述が適用される　*/
  
 }
-#map{
-   
-        
+.status_view{
+    color:red;
+    size:30px;
 }

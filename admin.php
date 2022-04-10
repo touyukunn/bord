@@ -22,8 +22,11 @@ session_start();
 $_SESSION['admin_login']=false;
 
 // 管理ページのログインパスワード
+define( 'PASSWORD', 'adminPassword');
 
-
+define('DB_host','localhost');
+define('DB_user','root');
+define('DB_name','bord');
 
 //DB接続
 try {
@@ -45,7 +48,7 @@ if(!empty($_POST['admin_password'])){
  
     if( !empty($_POST['admin_password']) && $_POST['admin_password'] == PASSWORD ){
 		$_SESSION['admin_login'] = true;
-        echo("ok");
+       
 	} else {
 		 echo <<<EOM
             <script type="text/javascript">
