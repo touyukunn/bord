@@ -108,13 +108,20 @@ hr{
 
 .srch{
     text-align:right;
+    
 }
 
 
 #view_time{
-    color:blue;
+    
     text-align: left;
-}
+    font-size:30px;
+    line-height:0.95em;
+	font-weight:bold;
+	color: transparent;
+	background: repeating-linear-gradient(0deg, #284ef7 0.1em, #284ef7 0.2em, #284ef7 0.3em, #1d08da 0.4em, #036eb6 0.5em); 
+	-webkit-background-clip: text;
+	-webkit-box-reflect: below -0.25em -webkit-gradient(linear, left bottom, left top, from(rgba(255, 255, 255, .6)), to(transparent));}
 
 div#sts{
    
