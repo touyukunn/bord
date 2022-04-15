@@ -19,12 +19,6 @@ div#rgn{font-size:30px;
     vertical-align: middle;
    } 
 
-
-#text{
-    height:200px;
-    font-size: 30px;
-    width:90;
-}
 #rg {
     text-align:center;
     color:green;
@@ -123,10 +117,15 @@ select{
 
 /*スマホ用CSS*/
 @media screen and (max-width:480px) {
-   
+    #text{
+    
+        height:200px;
+        font-size: 30px;
+        width:200px;
+    }
 
     #map{
-       width:300px;
+       width:200px;
             
     }
  
@@ -135,7 +134,12 @@ select{
 }
 /*PC用CSS*/
 @media screen and (min-width:1280px) {
-   
+    #text{
+    
+        height:200px;
+        font-size: 30px;
+        width:400;
+    }
 
     #map{
         padding-left: 900px;
