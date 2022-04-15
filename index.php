@@ -19,11 +19,12 @@ $stmt=null;
 $res=null;
 $option=null;
 
+//ログイン情報
 define('DB_host',getenv('host'));
 define('DB_user',getenv('user'));
 define('DB_name',getenv('name'));
 define('DB_pass',getenv('pass'));
-session_start();
+
 
 
 
@@ -172,8 +173,8 @@ $pdo = null;
 <form  method="post">
     <div class ="srch">
      <input type="text" name="search"placeholder="検索内容を入力">
-       <input type="submit" name="buttonk" value="検索">
-        </div>
+     <input type="submit" name="buttonk" value="検索">
+     </div>
         
 </form>
 <p id ="toukou">上田市</p>
@@ -181,26 +182,18 @@ $pdo = null;
 <br>
 
 <span id="map">
-
 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12845.06998343043!2d138.2293596346558!3d36.40272291786259!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sja!2sjp!4v1649470599292!5m2!1sja!2sjp" width="280" height="300"  style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </span>
 
 
 <form  method="post" enctype="multipart/formdata" class="cform">
      
-     
-  
      <div id="rgn">
          
          <span id="rg">地域</span>
-                
-         
          <textarea id="text1" name="region" >上田市</textarea>
      </div>
      
-     
-
-
      <div id="sts">
         <span id="stsst">状況</span>
       <select name="status">
@@ -218,8 +211,6 @@ $pdo = null;
          </label>
      </div>
          
-     
-
      <div id="button1">
         <input class ="btn" type="submit" name="button1"value="投稿"> 
      </div>
