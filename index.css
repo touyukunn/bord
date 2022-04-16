@@ -13,7 +13,7 @@ div#sente{font-size:30px;
  color:red;
  text-align:center;
  box-sizing:border-box;border:none;
- width:100%
+ 
 }  
 div#rgn{font-size:30px;
     vertical-align: middle;
@@ -87,6 +87,7 @@ hr{
     text-align:right;
     
 }
+/*時計*/
 #view_time{
     text-align: left;
     font-size:30px;
@@ -101,7 +102,7 @@ div#sts{
     display: inline-block;
     font-size: 30px;
     bottom: 300px;
-    text-align: center;
+    text-align:1 center;
 } 
 select{
     background:white;
@@ -138,7 +139,7 @@ select{
     
         height:200px;
         font-size: 30px;
-        width:400;
+        width: 800px;
     }
 
     #map{
