@@ -8,5 +8,5 @@ html,css,php
 <h2>deploy</h2>
 ・heroku
 ・Xfreeサーバ
-
+・AWS EC2
 
